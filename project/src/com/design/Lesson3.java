@@ -65,7 +65,7 @@ class ExpressSender implements Sender {
 // “发送”工厂类
 class SendFactory {
     // 普通简单工厂
-    public Sender produce(String type) {
+    Sender produce(String type) {
         if (type == null) {
             return null;
         } else if ("email".equalsIgnoreCase(type)) {
@@ -80,28 +80,28 @@ class SendFactory {
     }
 
     // 多方法简单工厂
-    public Sender produceSms(){
+    Sender produceSms(){
         return new SmsSender();
     }
 
-    public Sender produceEmail(){
+    Sender produceEmail(){
         return new EmailSender();
     }
 
-    public Sender produceExpress() {
+    Sender produceExpress() {
         return new ExpressSender();
     }
 
     // 静态方法简单工厂
-    public static Sender produceSmsStatic(){
+    static Sender produceSmsStatic(){
         return new SmsSender();
     }
 
-    public static Sender produceEmailStatic(){
+    static Sender produceEmailStatic(){
         return new EmailSender();
     }
 
-    public static Sender produceExpressStatic() {
+    static Sender produceExpressStatic() {
         return new ExpressSender();
     }
 }
