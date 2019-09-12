@@ -10,7 +10,7 @@ class Client {
         // 创建接收者
         Receiver receiver = new Receiver();
         // 创建命令对象，设定接收者
-        ICommand command = new Command(receiver);
+        Command command = new ConcreteCommand(receiver);
         // 创建请求者，把命令对象设置进去
         Invoker invoker = new Invoker(command);
         // 执行方法
@@ -26,15 +26,15 @@ class Receiver {
 }
 
 // 命令类
-interface ICommand {
+interface Command {
     void execute();
 }
 
 // 具体命令类
-class Command implements ICommand {
+class ConcreteCommand implements Command {
     private Receiver receiver;
 
-    public Command(Receiver receiver) {
+    public ConcreteCommand(Receiver receiver) {
         this.receiver = receiver;
     }
 
@@ -46,9 +46,9 @@ class Command implements ICommand {
 // 请求者类
 class Invoker {
     // 持有命令对象
-    private ICommand command;
+    private Command command;
 
-    public Invoker(ICommand command) {
+    public Invoker(Command command) {
         this.command = command;
     }
 
