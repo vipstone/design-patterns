@@ -1,5 +1,6 @@
 package com.design;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -20,6 +21,37 @@ public class Lesson19 {
         Iterator iterator = aggregate.createIterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
+        }
+
+        // 调用迭代器应用示例
+        new IteratorUseDemo().doIterator();
+    }
+}
+
+/**
+ * 迭代器应用——演示示例
+ */
+class IteratorUseDemo {
+    void doIterator() {
+        // 定义 Vector 集合
+        Vector vector = new Vector();
+        vector.add("Vector 1");
+        vector.add("Vector 2");
+        vector.add("Vector 3");
+        // 定义 ArrayList 集合
+        ArrayList list = new ArrayList();
+        list.add("ArrayList 1");
+        list.add("ArrayList 2");
+        list.add("ArrayList 3");
+        // 使用迭代器循环 Vector
+        java.util.Iterator vIterator = vector.iterator();
+        while (vIterator.hasNext()) {
+            System.out.println(vIterator.next());
+        }
+        // 使用迭代器循环 ArrayList
+        java.util.Iterator lIterator = list.iterator();
+        while (lIterator.hasNext()) {
+            System.out.println(lIterator.next());
         }
     }
 }
@@ -96,6 +128,7 @@ class ConcreteAggregate implements Aggregate {
         return vector.size();
     }
 
+    // 创建迭代器
     @Override
     public Iterator createIterator() {
         return new ConcreteIterator(this);
