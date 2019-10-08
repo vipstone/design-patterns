@@ -5,24 +5,24 @@ import java.util.Date;
 public class Lesson7 {
     public static void main(String[] args) throws Exception{
 //        Date date = new Date();
-//        Person p1 = new Person(23, date);
-//        Person p2 = p1;
+//        Human p1 = new Human(23, date);
+//        Human p2 = p1;
 //        System.out.println(p1);
 //        System.out.println(p2);
 
         Date date = new Date();
 
-        Person p1 = new Person(23, date);
-        Person p2 = (Person) p1.clone();
+        Human p1 = new Human(23, date);
+        Human p2 = (Human) p1.clone();
         System.out.println(p1);
         System.out.println(p2);
 
 //        Date date = new Date();
 //
-//        Person p1 = new Person(23, date);
-//        Person p2 = (Person) p1.clone();
-//        System.out.println(p1); // com.isoft.Person@1540e19d
-//        System.out.println(p2); // com.isoft.Person@677327b6
+//        Human p1 = new Human(23, date);
+//        Human p2 = (Human) p1.clone();
+//        System.out.println(p1); // com.isoft.Human@1540e19d
+//        System.out.println(p2); // com.isoft.Human@677327b6
 //
 //        System.out.println(p1.getAge() == p2.getAge()); // true
 //        date.setTime(234234234L);
@@ -32,7 +32,7 @@ public class Lesson7 {
     }
 }
 
-//class Person implements Cloneable{
+//class Human implements Cloneable{
 //    private int age; // 定义年龄字段
 //    private Date birth; // 定义生日字段
 //
@@ -41,11 +41,11 @@ public class Lesson7 {
 //        return super.clone();
 //    }
 //
-//    public Person(int age, Date birth) {
+//    public Human(int age, Date birth) {
 //        this.age = age;
 //        this.birth = birth;
 //    }
-//    public Person() {
+//    public Human() {
 //    }
 //
 //    public int getAge() {
@@ -65,24 +65,24 @@ public class Lesson7 {
 //    }
 //}
 
-class Person implements Cloneable{
+class Human implements Cloneable{
 
     private int age; // 定义年龄字段
     private Date birth; // 定义生日字段
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        Person p = (Person) super.clone();
+        Human p = (Human) super.clone();
         p.birth = (Date) birth.clone();
         return p;
     }
 
-    public Person(int age, Date birth) {
+    public Human(int age, Date birth) {
         this.age = age;
         this.birth = birth;
     }
 
-    public Person() {
+    public Human() {
     }
 
     public int getAge() {
