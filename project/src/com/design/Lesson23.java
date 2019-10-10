@@ -1,25 +1,104 @@
 package com.design;
 
+import java.util.Optional;
+
 /**
  * 空对象模式
  */
 public class Lesson23 {
     public static void main(final String[] args) {
-        // ------------- 1.空对象模式基础示例 Start -------------
-        final AbstractObject object1 = ObjectFactory.creator("Java");
-        final AbstractObject object2 = ObjectFactory.creator("MySQL");
-        final AbstractObject object3 = ObjectFactory.creator("SQL");
-        System.out.println(object1.getName());
-        System.out.println(object2.getName());
-        System.out.println(object3.getName());
-        // ------------- 空对象模式基础示例 End -------------
+//        // ------------- 1.空对象模式基础示例 Start -------------
+//        final AbstractObject object1 = ObjectFactory.creator("Java");
+//        final AbstractObject object2 = ObjectFactory.creator("MySQL");
+//        final AbstractObject object3 = ObjectFactory.creator("SQL");
+//        System.out.println(object1.getName());
+//        System.out.println(object2.getName());
+//        System.out.println(object3.getName());
+//        // ------------- 空对象模式基础示例 End -------------
+//
+//        // ------------- 2.空对象模式实例 Start -------------
+//        final AbstractGoods goods1 = GoodsFactory.find("001");
+//        final AbstractGoods goods2 = GoodsFactory.find("003");
+//        goods1.show();
+//        goods2.show();
+//        // ------------- 空对象模式实例 End -------------
 
-        // ------------- 2.空对象模式实例 Start -------------
-        final AbstractGoods goods1 = GoodsFactory.find("001");
-        final AbstractGoods goods2 = GoodsFactory.find("003");
-        goods1.show();
-        goods2.show();
-        // ------------- 空对象模式实例 End -------------
+        // JDK 8 Optional 对象判空示例
+        // 具体对象
+        User concreteUser = new User(new Address(new Country("china")));
+        // 空对象
+        User nullUser = new User(null);
+        // 具体对象编码获取
+        String concreteIsocode = Optional.ofNullable(concreteUser)
+                .flatMap(u -> u.getAddress())
+                .flatMap(a -> a.getCountry())
+                .map(c -> c.getIsocode())
+                .orElse("暂无").toUpperCase();
+        // 空对象编码获取
+        String nullIsocode = Optional.ofNullable(nullUser)
+                .flatMap(u -> u.getAddress())
+                .flatMap(a -> a.getCountry())
+                .map(c -> c.getIsocode())
+                .orElse("暂无").toUpperCase();
+        System.out.println("Concrete User：" + concreteIsocode);
+        System.out.println("Null User：" + nullIsocode);
+    }
+}
+
+/**
+ * 用户类
+ **/
+class User {
+    public User(Address address) {
+        this.address = address;
+    }
+
+    private Address address;
+
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+}
+
+/**
+ * 地址类
+ **/
+class Address {
+    public Address(Country country) {
+        this.country = country;
+    }
+
+    private Country country;
+
+    public Optional<Country> getCountry() {
+        return Optional.ofNullable(country);
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+}
+
+/**
+ * 国际编码类
+ **/
+class Country {
+    public Country(String isocode) {
+        this.isocode = isocode;
+    }
+
+    private String isocode;
+
+    public String getIsocode() {
+        return isocode;
+    }
+
+    public void setIsocode(String isocode) {
+        this.isocode = isocode;
     }
 }
 
