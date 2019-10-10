@@ -105,7 +105,7 @@ class Country {
 // ------------- 空对象模式实例 Start -------------
 
 /**
- * 统一商品对象
+ * 抽象（商品）对象
  **/
 abstract class AbstractGoods {
     public String isbn; // 商品编码
@@ -116,7 +116,7 @@ abstract class AbstractGoods {
 }
 
 /**
- * 实际商品
+ * 具体商品
  **/
 class ConcreteGoods extends AbstractGoods {
     public ConcreteGoods(String isbn, String name, Double price) {
@@ -142,7 +142,7 @@ class NullGoods extends AbstractGoods {
 }
 
 /**
- * 商品查询工厂
+ * 商品工厂
  **/
 class GoodsFactory {
     public static AbstractGoods find(final String isbn) {
