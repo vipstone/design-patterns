@@ -7,21 +7,21 @@ import java.util.Optional;
  */
 public class Lesson23 {
     public static void main(final String[] args) {
-//        // ------------- 1.空对象模式基础示例 Start -------------
-//        final AbstractObject object1 = ObjectFactory.creator("Java");
-//        final AbstractObject object2 = ObjectFactory.creator("MySQL");
-//        final AbstractObject object3 = ObjectFactory.creator("SQL");
-//        System.out.println(object1.getName());
-//        System.out.println(object2.getName());
-//        System.out.println(object3.getName());
-//        // ------------- 空对象模式基础示例 End -------------
-//
-//        // ------------- 2.空对象模式实例 Start -------------
-//        final AbstractGoods goods1 = GoodsFactory.find("001");
-//        final AbstractGoods goods2 = GoodsFactory.find("003");
-//        goods1.show();
-//        goods2.show();
-//        // ------------- 空对象模式实例 End -------------
+        // ------------- 1.空对象模式基础示例 Start -------------
+        final AbstractObject object1 = ObjectFactory.creator("Java");
+        final AbstractObject object2 = ObjectFactory.creator("MySQL");
+        final AbstractObject object3 = ObjectFactory.creator("SQL");
+        System.out.println(object1.getName());
+        System.out.println(object2.getName());
+        System.out.println(object3.getName());
+        // ------------- 空对象模式基础示例 End -------------
+
+        // ------------- 2.空对象模式实例 Start -------------
+        final AbstractGoods goods1 = GoodsFactory.find("001");
+        final AbstractGoods goods2 = GoodsFactory.find("003");
+        goods1.show();
+        goods2.show();
+        // ------------- 空对象模式实例 End -------------
 
         // JDK 8 Optional 对象判空示例
         // 具体对象
