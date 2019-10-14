@@ -13,6 +13,20 @@ public class Lesson20 {
         mediator.setC2(c2);
 
         c1.depMethod1();
+
+        // 定义一个中介者
+        MeditorCompany meditorCompany = new MeditorCompanyBeiKe("贝克找房");
+        // 定义一个卖家一个买家同事类
+        ColleagueSeller colleagueSeller = new ColleagueSeller(meditorCompany);
+        ColleagueBuyer colleagueBuyer = new ColleagueBuyer(meditorCompany);
+
+        // 给中介公司注册买家、卖家
+        meditorCompany.setBuyer(colleagueBuyer);
+        meditorCompany.setSeller(colleagueSeller);
+
+        // 操作
+        colleagueSeller.send("卖家发布需求...");
+        colleagueBuyer.send("买家发布需求...");
     }
 }
 
@@ -93,5 +107,89 @@ class ConcreteMediator extends Mediator{
     void doSomething() {
         this.c1.doSelfMethod1();
         this.c2.doSelfMethod2();
+    }
+}
+
+// 抽象的中介公司角色，中介者角色中一般都要包含各个同事角色，因为它要负责这些对象之间的交互
+abstract class MeditorCompany {
+    // 中介公司名称
+    private String name;
+    protected ColleagueSeller seller; // 卖家-同事角色
+    protected ColleagueBuyer buyer; // 买家-同事角色
+    // 发布一个需求，由中介公司去代为发布，入参为需求内容、发布人
+    abstract void publish(String message, Colleaguer colleaguer);
+
+    public MeditorCompany(String name) {
+        this.name = name;
+    }
+    public ColleagueSeller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(ColleagueSeller seller) {
+        this.seller = seller;
+    }
+
+    public ColleagueBuyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(ColleagueBuyer buyer) {
+        this.buyer = buyer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+// 具体的中介公司-贝克找房
+class MeditorCompanyBeiKe extends MeditorCompany{
+    public MeditorCompanyBeiKe(String name) {
+        super(name);
+    }
+
+    @Override
+    void publish(String message, Colleaguer colleaguer) {
+        if (colleaguer instanceof ColleagueSeller) { // 如果是卖家发布，则买家进行接收
+            buyer.accept(message);
+        } else if(colleaguer instanceof ColleagueBuyer) { // 如果是买家发布，则卖家进行接收
+            seller.accept(message);
+        }
+    }
+}
+// 抽象的同事角色
+abstract class Colleaguer {
+    protected MeditorCompany meditorCompany; // 对同事类而言，中介者必须是可见的
+    public Colleaguer(MeditorCompany meditorCompany) {
+        this.meditorCompany = meditorCompany;
+    }
+}
+// 卖家-同事角色
+class ColleagueSeller extends Colleaguer {
+    public ColleagueSeller(MeditorCompany meditorCompany) {
+        super(meditorCompany);
+    }
+    // 同事类发布一个需求，不过是通过中介公司去发布，发布人是自己
+    public void send(String message) {
+        meditorCompany.publish(message, this);
+    }
+    public void accept(String message) {
+        System.out.println("卖家接收到的消息是：" + message);
+    }
+}
+// 买家-同事角色
+class ColleagueBuyer extends Colleaguer {
+    public ColleagueBuyer(MeditorCompany meditorCompany) {
+        super(meditorCompany);
+    }
+    public void send(String message) {
+        meditorCompany.publish(message, this);
+    }
+    public void accept(String message) {
+        System.out.println("买家接收到的消息是：" + message);
     }
 }
