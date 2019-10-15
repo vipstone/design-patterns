@@ -3,6 +3,9 @@ package com.design;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 服务器定位模式
+ **/
 public class Lesson33 {
     public static void main(String[] args) {
         //------------- 服务器定位模式基础示例 -------------
