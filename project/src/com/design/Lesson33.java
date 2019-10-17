@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 服务器定位模式
- **/
+ */
 public class Lesson33 {
     public static void main(String[] args) {
         //------------- 服务器定位模式基础示例 -------------
@@ -36,7 +36,7 @@ public class Lesson33 {
 
 /**
  * 枪（服务）接口，用于定义统一行为
- **/
+ */
 interface Gun {
     // 枪械名称
     public String getName();
@@ -47,7 +47,7 @@ interface Gun {
 
 /**
  * 狙击枪
- **/
+ */
 class SniperRifle implements Gun {
 
     @Override
@@ -63,7 +63,7 @@ class SniperRifle implements Gun {
 
 /**
  * 机关枪
- **/
+ */
 class MachineGun implements Gun {
 
     @Override
@@ -78,8 +78,8 @@ class MachineGun implements Gun {
 }
 
 /**
- * 创建枪械（的服务）
- **/
+ * 创建枪械（服务）
+ */
 class CreateGun {
     public Gun lookup(String name) {
         if (name.equalsIgnoreCase("狙击枪")) {
@@ -93,7 +93,7 @@ class CreateGun {
 
 /**
  * 枪械缓存类
- **/
+ */
 class GunCache {
     // 用户存储缓存的容器
     private List<Gun> guns;
@@ -107,7 +107,7 @@ class GunCache {
      * @return Gun 具体的枪
      * @Description 获取缓存
      * @Param name 枪名
-     **/
+     */
     public Gun getGun(String name) {
         for (Gun gun : guns) {
             if (gun.getName().equalsIgnoreCase(name)) {
@@ -121,7 +121,7 @@ class GunCache {
     /**
      * @Description 给缓存中添加枪的信息
      * @Param Gun 具体的枪
-     **/
+     */
     public void addService(Gun gun) {
         guns.add(gun);
     }
@@ -129,7 +129,7 @@ class GunCache {
 
 /**
  * 服务定位器，获取服务的统一入口
- **/
+ */
 class GunLocator {
     private static GunCache gunCache;
 
@@ -142,7 +142,7 @@ class GunLocator {
      * @return Gun 具体的服务
      * @Description 获取具体的服务
      * @Param name 枪名
-     **/
+     */
     public static Gun getGun(String name) {
         // 先从缓存中获取枪信息
         Gun gun = gunCache.getGun(name);
@@ -162,7 +162,7 @@ class GunLocator {
 
 /**
  * 服务接口
- **/
+ */
 interface Service {
     public String getName();
 
@@ -171,7 +171,7 @@ interface Service {
 
 /**
  * 具体服务 A
- **/
+ */
 class ServiceA implements Service {
 
     @Override
@@ -187,7 +187,7 @@ class ServiceA implements Service {
 
 /**
  * 具体服务 B
- **/
+ */
 class ServiceB implements Service {
 
     @Override
@@ -203,7 +203,7 @@ class ServiceB implements Service {
 
 /**
  * 创建具体的服务（根据名称），提供给服务器定位器使用，普通用户不能直接使用
- **/
+ */
 class InitialContext {
     public Service lookup(String name) {
         if (name.equalsIgnoreCase("servicea")) {
@@ -217,7 +217,7 @@ class InitialContext {
 
 /**
  * 缓存类，用户缓存服务
- **/
+ */
 class Cache {
     // 用户存储缓存的容器
     private List<Service> services;
@@ -231,7 +231,7 @@ class Cache {
      * @return Service 具体的服务
      * @Description 获取缓存
      * @Param name 服务名称
-     **/
+     */
     public Service getService(String name) {
         for (Service service : services) {
             if (service.getName().equalsIgnoreCase(name)) {
@@ -245,7 +245,7 @@ class Cache {
     /**
      * @Description 给缓存中添加服务
      * @Param service 具体的服务
-     **/
+     */
     public void addService(Service service) {
         services.add(service);
     }
@@ -253,7 +253,7 @@ class Cache {
 
 /**
  * 服务定位器，获取服务的统一入口
- **/
+ */
 class ServiceLocator {
     private static Cache cache;
 
@@ -266,7 +266,7 @@ class ServiceLocator {
      * @return Service 具体的服务
      * @Description 获取具体的服务
      * @Param name 服务名
-     **/
+     */
     public static Service getService(String name) {
         // 先从缓存中获取服务
         Service service = cache.getService(name);
